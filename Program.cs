@@ -8,24 +8,53 @@ do
 {
     Console.WriteLine("Inserire 1 per aggiungere un documento");
     Console.WriteLine("Inserire 2 per noleggiare un documento");
+    Console.WriteLine("Inserire 3 per cercare un prestito");
     Console.WriteLine("-1 per terminare");
 
     scelta = Console.ReadLine();
 
-    if (scelta == "1")
+    switch(scelta)
     {
-        InserisciDocumento();
-    }
-
-    else if (scelta == "2")
-
-    {
-        EffettuaPrestito();
+        case "1":
+            InserisciDocumento();
+            break;
+        case "2":
+            EffettuaPrestito();
+            break;
+        case "3":
+            RicercaPrestito();
+            break;
+        default:
+            break; 
     }
 
 } while(scelta != "-1");
 
+void RicercaPrestito()
+{
+    bool found = false;
+    Console.WriteLine("inserisci il cognome dell'utente");
+    string cognome = Console.ReadLine();
 
+    foreach(Prestito prestito in ListaPrestito)
+    {
+        if(prestito.User.Cognome==cognome)
+        {
+            found = true;
+            Console.WriteLine("\r\n");
+            Console.WriteLine("INFORMAZIONI SUL PRESTITO: ");
+            Console.WriteLine("DOCUMENTO IN PRESTITO: "+ prestito.Document.Titolo);
+            Console.WriteLine("\r\n");
+
+        }
+    }
+
+    if(found==false)
+    {
+        Console.WriteLine("nesun prestito trovato");
+    }
+
+}
 void InserisciDocumento()
 {
     Console.WriteLine("Salve, per effettuare l'inserimento di un documento inserisca le seguenti informazioni");
@@ -96,8 +125,9 @@ void EffettuaPrestito()
 
                 ListaPrestito.Add(prestito);
 
-                Console.WriteLine("Il signor " + prestito.User.Cognome + " ha effettuato il noleggio del libro " + prestito.Document.Titolo);
-
+                Console.WriteLine("\r\n");
+                Console.WriteLine("IL SIGNOR " + prestito.User.Cognome + " HA EFFETTUATO IL NOLEGGIO DEL LIBRO " + prestito.Document.Titolo);
+                Console.WriteLine("\r\n");
             }
         }
     }
