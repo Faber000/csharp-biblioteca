@@ -107,13 +107,13 @@ void EffettuaPrestito()
     Utente utente = new Utente(nome, cognome, email, password, phone);
     ListaUtente.Add(utente);
 
-    Console.WriteLine("che documento vorrebbe leggere?");
+    Console.WriteLine("che documento vorrebbe leggere? (codice o titolo)");
 
-    string titolo = Console.ReadLine();
+    string input = Console.ReadLine();
 
     foreach (Documento documento in ListaDocumenti)
     {
-        if (documento.Titolo == titolo)
+        if (documento.Titolo == input | documento.Id == Convert.ToInt32(input))
         {
             if (documento.IsRented != true)
             {
