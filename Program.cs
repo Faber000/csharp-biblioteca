@@ -9,6 +9,7 @@ do
     Console.WriteLine("Inserire 1 per aggiungere un documento");
     Console.WriteLine("Inserire 2 per noleggiare un documento");
     Console.WriteLine("Inserire 3 per cercare un prestito");
+    Console.WriteLine("Inserire 4 cercare un documento");
     Console.WriteLine("-1 per terminare");
 
     scelta = Console.ReadLine();
@@ -24,12 +25,60 @@ do
         case "3":
             RicercaPrestito();
             break;
+        case "4":
+            RicercaDocumento();
+            break;
         default:
             break; 
     }
 
 } while(scelta != "-1");
 
+void RicercaDocumento()
+{
+    string titolo, input;
+    int id;
+
+    Console.WriteLine("Cercare tramite titolo o Id? T/I");
+
+    input = Console.ReadLine();
+
+    if(input == "T")
+    {
+        Console.WriteLine("Quale documento vuoi ricercare?");
+
+        titolo = Console.ReadLine();
+
+        foreach (Documento documento in ListaDocumenti)
+        {
+            if (documento.Titolo == titolo)
+            {
+                Console.WriteLine("\r\n");
+                Console.WriteLine("IL DOCUMENTO " + documento.Titolo + " E' STATO SCRITTO DA " + documento.Autore);
+                Console.WriteLine("\r\n");
+            }
+        }
+    }
+
+    else
+    {
+        Console.WriteLine("Quale documento vuoi ricercare?");
+
+        id = Convert.ToInt32(Console.ReadLine());
+
+        foreach (Documento documento in ListaDocumenti)
+        {
+            if (documento.Id == id)
+            {
+                Console.WriteLine("\r\n");
+                Console.WriteLine("IL DOCUMENTO " + documento.Titolo + " E' STATO SCRITTO DA " + documento.Autore);
+                Console.WriteLine("\r\n");
+            }
+        }
+    }
+
+    
+}
 void RicercaPrestito()
 {
     bool found = false;
@@ -113,7 +162,7 @@ void EffettuaPrestito()
 
     foreach (Documento documento in ListaDocumenti)
     {
-        if (documento.Titolo == input | documento.Id == Convert.ToInt32(input))
+        if (documento.Titolo == input)
         {
             if (documento.IsRented != true)
             {
