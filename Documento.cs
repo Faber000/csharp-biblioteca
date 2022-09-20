@@ -8,7 +8,13 @@
     public string Scaffale { get; set; }
     public string Autore { get; set; }
 
-
+    public Documento(string titolo, string autore)
+    {
+        Id = new Random().Next(100);
+        Titolo = titolo; 
+        Autore = autore;
+        IsRented = false;
+    }
     public Documento(int id, string titolo, int anno, string settore, bool isRented, string scaffale, string autore)
     {
         Id = id;
